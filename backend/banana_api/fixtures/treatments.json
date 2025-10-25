@@ -1,0 +1,56 @@
+[
+  {
+    "model": "banana_api.treatment",
+    "pk": 1,
+    "fields": {
+      "disease": 1,
+      "method": "- ตัดใบที่เป็นโรคออกและเผาทำลาย เพื่อลดการแพร่กระจายของเชื้อรา\n- พ่นสารป้องกันกำจัดเชื้อรา เช่น mancozeb, chlorothalonil หรือ propiconazole ตามอัตราที่แนะนำ\n- ควบคุมความชื้นในแปลง ไม่ปลูกกล้วยหนาแน่นเกินไป เพื่อให้อากาศถ่ายเทได้ดี",
+      "source": "https://www.fao.org/banana-diseases/black-sigatoka"
+    }
+  },
+  {
+    "model": "banana_api.treatment",
+    "pk": 2,
+    "fields": {
+      "disease": 2,
+      "method": "- ใช้พันธุ์กล้วยที่มีความต้านทานต่อไวรัส\n- ควบคุมเพลี้ยไฟซึ่งเป็นพาหะของโรค โดยใช้สารเคมีหรือชีวภัณฑ์\n- กำจัดวัชพืชรอบ ๆ แปลงที่อาจเป็นแหล่งสะสมของแมลงพาหะ",
+      "source": "https://www.ctahr.hawaii.edu/bbv"
+    }
+  },
+  {
+    "model": "banana_api.treatment",
+    "pk": 3,
+    "fields": {
+      "disease": 4,
+      "method": "- ใช้กับดักแสงไฟหรือกับดักฟีโรโมนควบคุมประชากรแมลง\n- ปล่อยตัวห้ำหรือใช้เชื้อราบิวเวอเรียควบคุมตามธรรมชาติ\n- ใช้สารเคมีป้องกันกำจัดแมลงอย่างระมัดระวัง และหมุนเวียนสารเพื่อลดการดื้อยา",
+      "source": "https://www.knowledgebank.irri.org"
+    }
+  },
+  {
+    "model": "banana_api.treatment",
+    "pk": 4,
+    "fields": {
+      "disease": 5,
+      "method": "- ถอนหรือโค่นต้นที่แสดงอาการและเผาทำลายทันที\n- กักกันพื้นที่ ห้ามเคลื่อนย้ายหน่อหรือต้นพันธุ์จากแปลงที่พบโรค\n- ใช้ต้นพันธุ์ที่ปลอดโรคและผ่านการรับรองจากแหล่งที่เชื่อถือได้",
+      "source": "https://www.fao.org/banana-diseases/moko"
+    }
+  },
+  {
+    "model": "banana_api.treatment",
+    "pk": 5,
+    "fields": {
+      "disease": 6,
+      "method": "- ใช้พันธุ์ต้านทานโรค Panama เช่น กล้วยคาเวนดิชที่ได้รับการปรับปรุงพันธุ์\n- หลีกเลี่ยงการปลูกซ้ำในพื้นที่ที่เคยมีการระบาดของโรค\n- ปรับปรุงดินและใช้วิธีการจัดการแบบปลอดเชื้อ เช่น การอบดินด้วยไอน้ำร้อน",
+      "source": "https://www.fao.org/banana-diseases/panama"
+    }
+  },
+  {
+    "model": "banana_api.treatment",
+    "pk": 6,
+    "fields": {
+      "disease": 7,
+      "method": "- ตัดใบที่เริ่มมีอาการออกทันทีและเผาทำลาย\n- พ่นสารป้องกันกำจัดเชื้อรา เช่น tridemorph หรือ propiconazole สลับกันเพื่อลดการดื้อยา\n- จัดการทรงพุ่มให้โปร่ง ลดความชื้นในแปลงปลูก",
+      "source": "https://www.fao.org/banana-diseases/yellow-sigatoka"
+    }
+  }
+]

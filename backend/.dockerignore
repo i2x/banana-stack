@@ -1,0 +1,40 @@
+# .dockerignore
+
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.*.yml
+
+# Python virtual environment
+env/
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets - Do not copy .env file into the image!
+.env
+*.env.*
+
+# IDE and editor directories
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Static and Media files (often handled by volumes or external services)
+media/
+staticfiles/
+
+# Test reports
+.coverage
+htmlcov/

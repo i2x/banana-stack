@@ -1,0 +1,64 @@
+services:
+  # 🐘 Database
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - ./backend/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # 🐍 Django backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      # ให้ตรงกับ STATIC_ROOT และ MEDIA_ROOT ใน settings.py (ไม่แก้ settings)
+      - ./static:/app/staticfiles           # ดูไฟล์ static ที่ collectstatic ได้จาก host
+      - ./media:/app/mediafiles             # media จะมาอยู่ที่ ./media บนเครื่อง
+    restart: on-failure
+
+  # 💻 Frontend (build แล้วแชร์ dist ให้ nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    volumes:
+      - frontend_dist:/app/dist             # ส่งออก dist ลง volume นี้
+    # ไม่ต้องรัน tail; ให้คอนเทนเนอร์จบหลัง build ก็ได้
+
+  # 🌐 Nginx
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      # ตรงกับ alias /static/ และ /media/ ใน nginx.conf
+      - ./static:/static:ro
+      - ./media:/media:ro
+      # เสิร์ฟ frontend dist
+      - frontend_dist:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  frontend_dist:

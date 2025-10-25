@@ -1,0 +1,72 @@
+[
+  {
+    "model": "banana_api.disease",
+    "pk": 1,
+    "fields": {
+      "name": "Banana Black Sigatoka Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 2,
+    "fields": {
+      "name": "Banana Bract Mosaic Virus Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 3,
+    "fields": {
+      "name": "Banana Healthy Leaf",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 4,
+    "fields": {
+      "name": "Banana Insect Pest Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 5,
+    "fields": {
+      "name": "Banana Moko Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 6,
+    "fields": {
+      "name": "Banana Panama Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  },
+  {
+    "model": "banana_api.disease",
+    "pk": 7,
+    "fields": {
+      "name": "Banana Yellow Sigatoka Disease",
+      "description": "ข้อมูลยังไม่ได้ระบุ",
+      "symptoms": "ข้อมูลยังไม่ได้ระบุ",
+      "image_example": null
+    }
+  }
+]

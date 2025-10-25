@@ -1,0 +1,80 @@
+services:
+  # -------------------------------------
+  # 1. บริการฐานข้อมูล PostgreSQL
+  # -------------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    # ใช้ Volume เพื่อเก็บข้อมูลฐานข้อมูลไว้แม้จะปิด Container ไปแล้ว
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # ดึงค่า User, Password, และชื่อ Database จากไฟล์ .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    # Map พอร์ตของ Container กับเครื่องคอมพิวเตอร์ของคุณ
+    ports:
+      - "5432:5432"
+    # --- เพิ่มส่วนนี้เข้าไป ---
+    # Healthcheck เพื่อตรวจสอบว่า PostgreSQL พร้อมใช้งานหรือยัง
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # ให้เริ่มทำงานใหม่เสมอถ้าไม่ได้สั่งปิดเอง
+    restart: unless-stopped
+
+  # -------------------------------------
+  # 2. บริการ Backend (Django)
+  # -------------------------------------
+  backend:
+    # สั่งให้สร้าง Image จาก Dockerfile ในไดเรกทอรีปัจจุบัน
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    container_name: django_backend
+    # คำสั่งที่ให้ Container รันเมื่อเริ่มต้น (Django development server)
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    # Mount โค้ดปัจจุบันเข้าไปใน Container ทำให้แก้โค้ดแล้วเห็นผลทันที (Hot Reload)
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    # ระบุไฟล์ .env ที่จะใช้สำหรับ Environment Variables
+    env_file:
+      - ./.env
+    # --- แก้ไข depends_on ตรงนี้ ---
+    # สั่งให้ backend รอจนกว่า healthcheck ของ db จะผ่าน (service_healthy)
+    depends_on:
+      db:
+        condition: service_healthy
+    # ให้เริ่มทำงานใหม่ถ้าหากเกิดข้อผิดพลาด
+    restart: on-failure
+
+  # -------------------------------------
+  # 3. บริการ pgAdmin (เครื่องมือจัดการฐานข้อมูล)
+  # -------------------------------------
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_service
+    # ดึงค่า Email และ Password สำหรับล็อกอิน pgAdmin จากไฟล์ .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - db
+    restart: unless-stopped
+
+# -------------------------------------
+# กำหนด Volumes ที่จะใช้งาน
+# -------------------------------------
+volumes:
+  postgres_data:
+  pgadmin_data:
+

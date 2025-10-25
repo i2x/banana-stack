@@ -1,0 +1,19 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    volumes:
+      - ./dist:/app/dist
+    command: sh -c "npm run build"
